@@ -1,0 +1,9 @@
+{
+    "name": "Garuo API",
+    "Account":{
+        "Healer1": ["ilovecandies","ilovetocodeinjs"],
+        "Healer2": ["MadeByHealer","wow"],
+        "Healer3": ["",""]
+    }
+    
+}

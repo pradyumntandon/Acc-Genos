@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <title>Acc Garou</title>
+        <link rel="stylesheet" href="style.css">
+        <meta name="author" content="Gamecooler19">
+        <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/7107/7107994.png">
+        <meta name="twitter:card" content="https://cdn-icons.flaticon.com/png/512/4926/premium/4926492.png" href="https://twitter.com/gamecooler19">
+        <meta name="description" content="Account Generator Website Template Like H-gen" />
+        <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/7107/7107994.png">
+        <!--------------ARC SERVICE LOADER--------------->
+        <script async src="https://arc.io/widget.min.js#vxTWBLeM"></script>
+    </head>
+
+    <body>
+
+        <!--------------Main Gen--------------->
+        <div class ="Outbound">
+          <img src="https://cdn-icons-png.flaticon.com/512/1047/1047690.png" width="150px">
+           <!--------------Gen Div--------------->
+            <div class="Generate" style="display: none;">
+                <input type="text" id="Generated" value="Click Generate Button">
+                <div class="button">
+                    <button class="Generate_button" onclick="Generate();">Generate & Copy</button>
+                </div>
+            </div>
+            <br>
+            <!--------------END OF GEN DIV--------------->
+
+
+
+            <!--------------Div For ip timer--------------->
+            <div class="Timer">
+                <span id="hed"></span>
+                <span id="ms_timer" class="d-block mb-2"></span>
+                <br>
+                <br>
+            </div>
+            <div class="Timer1">
+                <p id="ip"></p>
+            </div>
+            <!--------------END OF TIMER DIV--------------->
+
+
+        </div>
+        <!--------------END OF MAIN DIV--------------->
+
+
+        <script src="index.js"></script>
+
+
+        <!--------------IP TIMER--------------->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://harshen.github.io/jquery-countdownTimer/jquery.countdownTimer.min.js"></script>
+
+
+        <script>
+            $(function() {
+
+            let currUserIP
+            $.getJSON("https://api.ipify.org/?format=json", function(e) {
+              currUserIP = e.ip //set variable
+              checkCounter() //check counter
+            });
+            
+            //get user IP and check if its matches
+            function checkCounter() {
+              let getUserIp = localStorage.getItem('setUserIP'); //get loca storage
+              if (getUserIp == currUserIP) {
+                document.getElementsByClassName("Generate")[0].style.display = "none";
+                document.getElementById("hed").innerHTML="Please Wait For :-  ."
+                document.getElementById("ip").innerHTML="You Are Logged In With :- "+getUserIp+" . We Have Done This In Order To Save Resources";
+                $('#ms_timer').countdowntimer({
+                  minutes:  05,
+                  seconds: 00,
+                  size: "lg",
+                  timeUp: function() {
+                    document.getElementsByClassName("Generate")[0].style.display = "block";
+                    document.getElementsByClassName("Timer")[0].style.display = "none";
+                    document.getElementsByClassName("Timer1")[0].style.display = "none";
+                  }
+                });
+              } else {
+                document.getElementsByClassName("Generate")[0].style.display = "block";
+                document.getElementsByClassName("Timer")[0].style.display = "none";
+                document.getElementsByClassName("Timer1")[0].style.display = "none";
+                localStorage.setItem('setUserIP', currUserIP);
+              }
+            }
+            });
+        </script>
+
+
+    </body>
+</html>
